@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test API CORS</title>
+</head>
+<body>
+    <h1>Liste des personnages</h1>
+    <ul id="personnages-list"></ul>
+
+    <script>
+        // URL de ton API FastAPI
+        const apiUrl = 'http://127.0.0.1:8000/personnages';
+
+        // Envoi d'une requête GET avec un token dans les headers
+        fetch(apiUrl, {
+            method: 'GET',
+            headers: {
+                'token': '123abc'  // Token attendu
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Token invalide');
+            }
+            return response.json();
+        })
+        .then(data => {
+            const list = document.getElementById('personnages-list');
+            data.forEach(personnage => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${personnage.nom} (${personnage.univers})`;
+                list.appendChild(listItem);
+            });
+        })
+        .catch(error => {
+            alert(error);
+        });
+    </script>
+</body>
+</html>

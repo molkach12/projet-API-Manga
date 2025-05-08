@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Test API Personnages</title>
+</head>
+<body>
+  <h1>Liste des personnages :</h1>
+  <ul id="personnages-list"></ul>
+
+  <script>
+    // URL de l'API
+    const apiUrl = 'http://127.0.0.1:8000/personnages';
+
+    // Envoi de la requête GET avec le token dans les headers
+    fetch(apiUrl, {
+      method: 'GET',
+      headers: {
+        'token': '123abc'  // Ton token d'authentification ici
+      }
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Erreur : ' + response.status);
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log(data);  // Affiche la réponse dans la console
+      const list = document.getElementById('personnages-list');
+      data.forEach(personnage => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `${personnage.nom} (${personnage.univers})`;
+        list.appendChild(listItem);
+      });
+    })
+    .catch(error => {
+      console.error('Erreur lors de la requête :', error);
+      alert('Impossible de récupérer les personnages : ' + error.message);
+    });
+  </script>
+</body>
+</html>

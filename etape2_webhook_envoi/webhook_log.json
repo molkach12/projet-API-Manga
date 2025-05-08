@@ -1,0 +1,18 @@
+[
+    {
+        "nom": "Naruto",
+        "score": 80,
+        "niveau": "confirmé"
+    },
+    {
+        "nom": "Naruto",
+        "score": 87,
+        "niveau": "confirmé"
+    },
+    {
+        "id": "37d7944d-c1d7-4e80-9075-a63f20c2eca4",
+        "nom": "string",
+        "score": 0,
+        "niveau": "débutant"
+    }
+]
